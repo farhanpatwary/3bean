@@ -1,4 +1,5 @@
-import React, { FunctionComponent, MouseEventHandler } from "react";
+import React, { FunctionComponent, MouseEventHandler, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 interface RegisterProps {
   updateLoginState: Function;
@@ -9,6 +10,7 @@ export const RegisterComponent: FunctionComponent<RegisterProps> = ({
   updateLoginState,
   updatePanelSwipeRight,
 }) => {
+  const [errors, updateErrors] = useState([]);
   const formFields = [
     {
       label: "Username",
@@ -16,6 +18,7 @@ export const RegisterComponent: FunctionComponent<RegisterProps> = ({
       id: "username",
       name: "username",
       required: true,
+      pattern: "[a-z]{0,9}",
     },
     {
       label: "Email Address",
@@ -35,14 +38,21 @@ export const RegisterComponent: FunctionComponent<RegisterProps> = ({
       label: "Confirm your password",
       type: "password",
       id: "confirm-password",
-      name: "password",
+      name: "confirm-password",
       required: true,
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(e);
+    const formData: any = {};
+    formFields.forEach((field) => {
+      const cur = e.target[field.id].value as string;
+      formData[field.id] = cur;
+    });
+
+    // validate data
+    console.log(formData);
   };
 
   const handleBackButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,14 +69,23 @@ export const RegisterComponent: FunctionComponent<RegisterProps> = ({
     }, 1);
   };
 
+  const handleFormInputDataChange = useDebouncedCallback(() => {
+    console.log("deb");
+    // validate form data
+  }, 500);
+
   return (
     <>
       <h1 className="text-3xl font-bold w-fit mb-6">Register to 3bean</h1>
-      <form method="post" className=" w-80" onSubmit={handleSubmit}>
+      <form
+        className=" w-80"
+        onSubmit={handleSubmit}
+        onChange={() => handleFormInputDataChange()}
+      >
         {formFields.map((field, index) => {
           return (
             <div key={index} className="grid grid-cols-1">
-              <label className="text-sm text-gray-700 mb-2" htmlFor="username">
+              <label className="text-sm text-gray-700 mb-2" htmlFor={field.id}>
                 {field.label}
               </label>
               <input
@@ -75,10 +94,12 @@ export const RegisterComponent: FunctionComponent<RegisterProps> = ({
                 type={field.type}
                 id={field.id}
                 name={field.name}
+                pattern={field.pattern}
               />
             </div>
           );
         })}
+        <div>{}</div>
         <p className="text-sm text-gray-700">
           Already have an account?{" "}
           <button
