@@ -18,3 +18,31 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.swipe-left {
+  animation-duration: 0.2s;
+  animation-name: slide-left;
+}
+
+@keyframes slide-left {
+  from {
+    transform: translate(50%);
+  }
+  to {
+    transform: translate(0%);
+  }
+}
+
+.swipe-right {
+  animation-duration: 0.2s;
+  animation-name: slide-right;
+}
+
+@keyframes slide-right {
+  from {
+    transform: translate(-50%);
+  }
+  to {
+    transform: translate(0%);
+  }
+}

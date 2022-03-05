@@ -4,6 +4,7 @@ import { RegisterComponent } from "../register/register.component";
 type loginState = "default" | "register" | "sign-in";
 export const AuthPanel: FunctionComponent = () => {
   const [loginState, updateLoginState] = useState("default" as loginState);
+  const [panelSwipeRight, updatePanelSwipeRight] = useState(false);
 
   const goToRegister = () => {
     updateLoginState("register");
@@ -16,7 +17,7 @@ export const AuthPanel: FunctionComponent = () => {
   switch (loginState) {
     case "default":
       return (
-        <>
+        <div className={`${panelSwipeRight ? "swipe-right" : ""}`}>
           <h1 className="text-3xl font-bold w-fit mb-6">Welcome to 3bean</h1>
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -32,11 +33,18 @@ export const AuthPanel: FunctionComponent = () => {
               Login
             </button>
           </div>
-        </>
+        </div>
       );
     case "register":
-      return <RegisterComponent />;
+      return (
+        <div className="swipe-left">
+          <RegisterComponent
+            updateLoginState={updateLoginState}
+            updatePanelSwipeRight={updatePanelSwipeRight}
+          />
+        </div>
+      );
     case "sign-in":
-      return <div></div>;
+      return <div className="swipe-left"></div>;
   }
 };

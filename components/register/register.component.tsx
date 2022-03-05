@@ -1,6 +1,14 @@
 import React, { FunctionComponent, MouseEventHandler } from "react";
 
-export const RegisterComponent: FunctionComponent = () => {
+interface RegisterProps {
+  updateLoginState: Function;
+  updatePanelSwipeRight: Function;
+}
+
+export const RegisterComponent: FunctionComponent<RegisterProps> = ({
+  updateLoginState,
+  updatePanelSwipeRight,
+}) => {
   const formFields = [
     {
       label: "Username",
@@ -30,7 +38,12 @@ export const RegisterComponent: FunctionComponent = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit");
+  };
+
+  const handleBackButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    updatePanelSwipeRight(true);
+    updateLoginState("default");
   };
 
   return (
@@ -54,9 +67,15 @@ export const RegisterComponent: FunctionComponent = () => {
         })}
         <button
           type="submit"
-          className="mt-8 px-4 py-2 font-medium text-white bg-black border border-transparent rounded-md hover:bg-gray-700 focus:outline-none"
+          className="mt-8 px-4 py-2 font-medium text-white bg-black border border-transparent rounded-md hover:bg-gray-700 focus:outline-none mr-2"
         >
           Register
+        </button>
+        <button
+          onClick={handleBackButtonClick}
+          className="px-4 py-2 font-medium text-gray-900 bg-white border-2 border-gray-50 rounded-md hover:border-gray-900 focus:outline-none"
+        >
+          Back
         </button>
       </form>
     </>
