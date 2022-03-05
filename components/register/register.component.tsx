@@ -15,29 +15,34 @@ export const RegisterComponent: FunctionComponent<RegisterProps> = ({
       type: "text",
       id: "username",
       name: "username",
+      required: true,
     },
     {
       label: "Email Address",
       type: "email",
       id: "email",
       name: "email address",
+      required: true,
     },
     {
       label: "Create a password",
       type: "password",
       id: "password",
       name: "password",
+      required: true,
     },
     {
       label: "Confirm your password",
       type: "password",
       id: "confirm-password",
       name: "password",
+      required: true,
     },
   ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(e);
   };
 
   const handleBackButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,6 +70,7 @@ export const RegisterComponent: FunctionComponent<RegisterProps> = ({
                 {field.label}
               </label>
               <input
+                required={!!field.required}
                 className="p-2 rounded-md mb-4 border-2 border-gray-100 form-input"
                 type={field.type}
                 id={field.id}
