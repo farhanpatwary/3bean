@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from "react";
+import { LoginComponent } from "../log-in/log-in.component";
 import { RegisterComponent } from "../register/register.component";
 
 type loginState = "default" | "register" | "sign-in";
@@ -45,6 +46,13 @@ export const AuthPanel: FunctionComponent = () => {
         </div>
       );
     case "sign-in":
-      return <div className="swipe-left"></div>;
+      return (
+        <div className="swipe-left">
+          <LoginComponent
+            updateLoginState={updateLoginState}
+            updatePanelSwipeRight={updatePanelSwipeRight}
+          />
+        </div>
+      );
   }
 };
