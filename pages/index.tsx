@@ -13,16 +13,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="grid grid-cols-2">
+        <div className="grid lg:grid-cols-2 sm:grid-cols-1">
           <div className="h-screen flex justify-center items-center flex-col bg-gray-50">
             <AuthPanel />
           </div>
-          <div className="h-screen w-full overflow-hidden">
-            <Image
-              className="h-screen w-full object-cover opacity-80"
-              src={SplashImage}
-              alt=""
-            />
+          <div className="h-screen w-full overflow-hidden lg:block sm:hidden object-cover opacity-80 splash-gradient-1">
+            {/* <Image className="h-full w-full" src={SplashImage} alt="" /> */}
           </div>
         </div>
       </main>
