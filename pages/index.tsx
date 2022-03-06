@@ -17,9 +17,7 @@ const Home: NextPage = () => {
           <div className="h-screen flex justify-center items-center flex-col bg-gray-50">
             <AuthPanel />
           </div>
-          <div className="h-screen w-full overflow-hidden lg:block sm:hidden object-cover opacity-80 splash-gradient-1">
-            {/* <Image className="h-full w-full" src={SplashImage} alt="" /> */}
-          </div>
+          <div className="h-screen w-full overflow-hidden lg:block hidden splash-gradient-1 opacity-95"></div>
         </div>
       </main>
     </div>
