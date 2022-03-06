@@ -64,7 +64,7 @@ export const LoginComponent: FunctionComponent<LoginProps> = ({
           );
         })}
         <p className="text-sm text-gray-700">
-          Haven't got an account?{" "}
+          Haven&apos;t got an account?{" "}
           <button
             onClick={handleRegisterButtonClick}
             className="font-medium hover:underline text-gray-900"

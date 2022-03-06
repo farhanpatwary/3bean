@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { AuthPanel } from "../components/auth-panel/auth-panel.component";
+import Image from "next/image";
+import SplashImage from "../public/assets/splash/splash-image.jpg";
 
 const Home: NextPage = () => {
   return (
@@ -15,10 +17,10 @@ const Home: NextPage = () => {
           <div className="h-screen flex justify-center items-center flex-col bg-gray-50">
             <AuthPanel />
           </div>
-          <div>
-            <img
+          <div className="h-screen w-full overflow-hidden">
+            <Image
               className="h-screen w-full object-cover opacity-80"
-              src="https://images.unsplash.com/photo-1645181196184-3ae5bf3fc91d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1635&q=80"
+              src={SplashImage}
               alt=""
             />
           </div>
